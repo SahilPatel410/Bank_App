@@ -6,7 +6,7 @@ public class Admin {
 		try
 		{
 			Connection con=DriverManager.getConnection("jdbc:mysql://192.168.1.140:3306/bank_db?user=root&password=root");
-			//
+
 			Statement st=con.createStatement();
 			String query="Select * from Employee";
 			
