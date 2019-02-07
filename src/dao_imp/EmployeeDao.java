@@ -29,10 +29,10 @@ public class EmployeeDao implements IEmployeeDao {
 			PreparedStatement ps=con.prepareStatement("insert into employee(emp_fname,emp_lname,emp_city,emp_age,emp_contact,emp_role) values(?,?,?,?,?,?)");
 			ps.setString(1,fname);
 			ps.setString(2,lname);
-			ps.setString(2,city);
-			ps.setInt(3,age);
-			ps.setInt(4,contact);
-			ps.setString(5,role);
+			ps.setString(3,city);
+			ps.setInt(4,age);
+			ps.setInt(5,contact);
+			ps.setString(6,role);
 			
 			ps.executeUpdate();
 			
