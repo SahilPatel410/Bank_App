@@ -21,13 +21,14 @@ public class EmployeeDao implements IEmployeeDao {
 		
 	}
 	
-	public void Add_Employee(String name,String city,int age,int contact,String role)
+	public void Add_Employee(String fname,String lname,String city,int age,int contact,String role)
 	{
 		try
 		{
 			connect_db();
-			PreparedStatement ps=con.prepareStatement("insert into employee(emp_name,emp_city,emp_age,emp_contact,emp_role) values(?,?,?,?,?)");
-			ps.setString(1,name);
+			PreparedStatement ps=con.prepareStatement("insert into employee(emp_fname,emp_lname,emp_city,emp_age,emp_contact,emp_role) values(?,?,?,?,?,?)");
+			ps.setString(1,fname);
+			ps.setString(2,lname);
 			ps.setString(2,city);
 			ps.setInt(3,age);
 			ps.setInt(4,contact);
