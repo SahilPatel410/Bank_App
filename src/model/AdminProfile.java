@@ -26,13 +26,9 @@ public class AdminProfile {
 		String role = sc.nextLine();
 		
 		obj.addEmployee(fname, lname, city, age, contact, role);
-<<<<<<< HEAD
 
-		System.out.println("Your Reacord has addedd successfully!");
-
-=======
 		System.out.println("Your Record has addedd successfully!");
->>>>>>> c8bd184f4239e738e6ec6b878ff932a0e612aecc
+
 	}
 	public void remove(){
 		System.out.println("Search name of Employee to be deleted");
@@ -40,13 +36,10 @@ public class AdminProfile {
 		obj.search(name);
 		System.out.println("Enter id of employee to delete");
 		int id = sc.nextInt();
-<<<<<<< HEAD
-		obj.removeEmployee(id);		
 
-=======
 		int returnid=obj.removeEmployee(id);		
 		if(returnid!=0){System.out.println("Your Record has Removed successfully!");}
->>>>>>> c8bd184f4239e738e6ec6b878ff932a0e612aecc
+
 	}
 	public void viewEmp(){
 		obj.viewEmployee();

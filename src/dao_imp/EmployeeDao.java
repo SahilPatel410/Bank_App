@@ -225,19 +225,14 @@ public class EmployeeDao implements IEmployeeDao {
 		try{
 			connect_db();
 			con.setAutoCommit(false);
-<<<<<<< HEAD
+
 
 			if(!checkAccNo(acc_no))
 			{
 				return 0;
 			}
 
-=======
-			if(!checkAccNo(acc_no))
-			   {
-			    return 0;
-			   }
->>>>>>> c8bd184f4239e738e6ec6b878ff932a0e612aecc
+
 			int curr_bal=0;
 			String selectbal = "SELECT Acc_balance FROM account where Acc_no = ?";
 			PreparedStatement ps = con.prepareStatement(selectbal);
@@ -283,7 +278,7 @@ public class EmployeeDao implements IEmployeeDao {
 		try{
 			connect_db();
 			con.setAutoCommit(false);
-<<<<<<< HEAD
+
 
 
 			if(!checkAccNo(acc_no))
@@ -291,12 +286,7 @@ public class EmployeeDao implements IEmployeeDao {
 				return 0;
 			}
 
-=======
-			if(!checkAccNo(acc_no))
-			   {
-			    return 0;
-			   }
->>>>>>> c8bd184f4239e738e6ec6b878ff932a0e612aecc
+
 			int curr_bal=0;
 			String selectbal = "SELECT Acc_balance FROM account where Acc_no = ?";			
 			PreparedStatement ps = con.prepareStatement(selectbal);
@@ -331,10 +321,6 @@ public class EmployeeDao implements IEmployeeDao {
 	public int checkBal(int acc_no){
 		try{
 			connect_db();
-<<<<<<< HEAD
-
-=======
->>>>>>> c8bd184f4239e738e6ec6b878ff932a0e612aecc
 			if(!checkAccNo(acc_no)){
 				return 0;
 			}
@@ -502,27 +488,7 @@ public class EmployeeDao implements IEmployeeDao {
 		}
 	}
 	public boolean checkAccNo(int accNo){
-<<<<<<< HEAD
-		try{
-			connect_db();
-			String selectacc = "SELECT Acc_no FROM bank_db.account where Acc_no=?";
-			PreparedStatement ps = con.prepareStatement(selectacc);
-			ps.setInt(1,accNo);
-			ResultSet rs = ps.executeQuery();
-			if(rs.next())
-			{return true;
-			}else{
-			System.out.println("Account Does not exist");
-			return false;}
-		}
-		catch(Exception e)
-		{
-			System.out.println("Account Does not exist");
-			return false;
-		}
-	}
 
-=======
 		  try{
 		   connect_db();
 		   String selectacc = "SELECT Acc_no FROM bank_db.account where Acc_no=?";
@@ -541,5 +507,5 @@ public class EmployeeDao implements IEmployeeDao {
 		   return false;
 		  }
 		 }
->>>>>>> c8bd184f4239e738e6ec6b878ff932a0e612aecc
+
 }
