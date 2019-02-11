@@ -249,6 +249,12 @@ public class EmployeeDao implements IEmployeeDao {
 		try{
 			connect_db();
 			con.setAutoCommit(false);
+
+			if(!checkAccNo(acc_no))
+			{
+				return 0;
+			}
+
 			int curr_bal=0;
 			String selectbal = "SELECT Acc_balance FROM account where Acc_no = ?";
 			PreparedStatement ps = con.prepareStatement(selectbal);
@@ -299,6 +305,13 @@ public class EmployeeDao implements IEmployeeDao {
 		try{
 			connect_db();
 			con.setAutoCommit(false);
+
+
+			if(!checkAccNo(acc_no))
+			{
+				return 0;
+			}
+
 			int curr_bal=0;
 			String selectbal = "SELECT Acc_balance FROM account where Acc_no = ?";
 			
@@ -337,14 +350,19 @@ public class EmployeeDao implements IEmployeeDao {
 	public int checkBal(int acc_no){
 		try{
 			connect_db();
+
+			if(!checkAccNo(acc_no)){
+				return 0;
+			}
 			String selectbal = "SELECT Acc_balance FROM account where Acc_no = ?";
 			PreparedStatement ps = con.prepareStatement(selectbal);
 			ps.setInt(1, acc_no);
 			ResultSet rs = ps.executeQuery();
-			while(rs.next())
-			{
+			while(rs.next()){
 				return rs.getInt(1);
 			}
+			
+
 		}
 		catch(Exception e)
 		{
@@ -497,6 +515,25 @@ public class EmployeeDao implements IEmployeeDao {
 		catch(Exception e)
 		{
 			System.out.print("Unable to Change the Status");
+			return false;
+		}
+	}
+	public boolean checkAccNo(int accNo){
+		try{
+			connect_db();
+			String selectacc = "SELECT Acc_no FROM bank_db.account where Acc_no=?";
+			PreparedStatement ps = con.prepareStatement(selectacc);
+			ps.setInt(1,accNo);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next())
+			{return true;
+			}else{
+			System.out.println("Account Does not exist");
+			return false;}
+		}
+		catch(Exception e)
+		{
+			System.out.println("Account Does not exist");
 			return false;
 		}
 	}
