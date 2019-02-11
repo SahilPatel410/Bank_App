@@ -4,16 +4,16 @@ import java.io.*;
 import java.util.*;
 public class Admin {
 	
-	String acc_name;
+	String Acc_name;
 
 	public String get_acc_name()
 	
 	{
-		return acc_name;
+		return Acc_name;
 	}
 	public void set_acc_name(String acc_name)
 	{
-		acc_name= acc_name;
+		Acc_name= acc_name;
 	}
 	public static void main(String args[])
 	{
@@ -21,7 +21,7 @@ public class Admin {
 //		//obj.Add_Employee("Yesha","Dave","Bhuj",20,123456789,"Admin");
 //		//int a=obj.Remove_Employee("Yesha","Dave");
 //obj.search("Ram");
-	obj.Check_all_loan_status();
+	obj.checkAllLoanStatus();
 //		//obj.View_Employee();
 ////		int a=obj.Edit_Employee("Ram","Dave", "Ahmedabd", 20, 7898789, "Admin");
 //		
@@ -39,7 +39,7 @@ public class Admin {
 //	{
 //		System.out.print("Transcation Completed..!!");
 //	}
-	obj.Give_Loan(2019002,60000,8000,"Personal","Pending");
+	obj.giveLoan(2019002,60000,8000,"Personal","Pending");
 }
 
 }
