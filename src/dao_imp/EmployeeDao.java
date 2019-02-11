@@ -395,7 +395,7 @@ public class EmployeeDao implements IEmployeeDao {
 	public void getAllAccDetails(){
 		try{
 			connect_db();
-			String selectbal = "SELECT id,Acc_no,Acc_type,Acc_holder_name,Acc_balance FROM account";
+			String selectbal = "SELECT * FROM account";
 			PreparedStatement ps = con.prepareStatement(selectbal);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next())
