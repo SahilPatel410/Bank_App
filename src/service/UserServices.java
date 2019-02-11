@@ -5,6 +5,7 @@ import java.util.Scanner;
 import dao_imp.EmployeeDao;
 import model.AdminProfile;
 import model.EmployeeProfile;
+
 public class UserServices {
 	AdminProfile objAdmin = new AdminProfile();
 	EmployeeProfile objEmp = new EmployeeProfile();
@@ -16,13 +17,12 @@ public class UserServices {
 			System.out.println("Enter 1 to Add employee");
 			System.out.println("Enter 2 to Remove employee");
 			System.out.println("Enter 3 to View all employee");
-			System.out.println("Enter 4 to  view details of all the accounts");
+			System.out.println("Enter 4 to view details of all the accounts");
 			System.out.println("Enter 5 to see all loan status");
 			System.out.println("Enter 6 for Logout");
 			System.out.println("------------------------------------");	
 			choice = sc.next();
 			sc.nextLine();
-		
 			switch(choice){
 				case "1":
 					objAdmin.add();
@@ -75,7 +75,7 @@ public class UserServices {
 				System.out.println("Enter right choice");
 				break;
 			}
-		}while(!choice.equals("2"));
+		}while(!choice.equals("4"));
 	}
 	public UserServices(String s){
 		

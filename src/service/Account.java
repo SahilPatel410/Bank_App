@@ -31,19 +31,30 @@ public class Account {
 				break;
 			case "2":
 				int bal=objAcc.checkBalance();
+<<<<<<< HEAD
 
+=======
+>>>>>>> c8bd184f4239e738e6ec6b878ff932a0e612aecc
 				if(bal>0){
 					System.out.println("Your Balance is Rs "+bal);}
 				break;
 			case "3":
 				int amt=objAcc.deposite();
 				if(amt>0){
+<<<<<<< HEAD
 					System.out.println("Total Balance is "+amt);}
+=======
+					System.out.println("Your Balance is Rs "+amt);}
+>>>>>>> c8bd184f4239e738e6ec6b878ff932a0e612aecc
 				break;
 			case "4":
 				int amt1=objAcc.withdraw();
 				if(amt1>0){
+<<<<<<< HEAD
 					System.out.println("Total Balance is "+amt1);}
+=======
+					System.out.println("Your Balance is Rs "+amt1);}
+>>>>>>> c8bd184f4239e738e6ec6b878ff932a0e612aecc
 				break;
 			case "5":
 				boolean tStatus=objAcc.transfer();

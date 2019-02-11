@@ -10,8 +10,13 @@ public interface IEmployeeDao {
 	public int removeEmployee(int id);
 	public void search(String fname);
 	public int getEmployeeId(String fname);
+<<<<<<< HEAD
 	
 
+=======
+	public boolean checkAccNo(int accNo);
+	public void editAccountDetails(int acc_no,String accName);
+>>>>>>> c8bd184f4239e738e6ec6b878ff932a0e612aecc
 	public void addNewAccount(int acc_no,String acc_type,String acc_holder_name,int acc_bal);
 	public void getAccDetails(int acc_no);
 	public int deposite(int amt, int acc_no);
