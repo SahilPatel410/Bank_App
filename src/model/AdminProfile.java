@@ -23,6 +23,7 @@ public class AdminProfile {
 		sc.nextLine();
 		System.out.println("Role:");
 		String role = sc.nextLine();
+		
 		obj.addEmployee(fname, lname, city, age, contact, role);
 
 		System.out.println("Your Reacord has addedd successfully!");
