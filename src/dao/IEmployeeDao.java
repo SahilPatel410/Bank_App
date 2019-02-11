@@ -10,7 +10,7 @@ public interface IEmployeeDao {
 	public int removeEmployee(int id);
 	public void search(String fname);
 	public int getEmployeeId(String fname);
-	
+	public boolean checkAccNo(int accNo);
 	public void editAccountDetails(int acc_no,String accName);
 	public void addNewAccount(int acc_no,String acc_type,String acc_holder_name,int acc_bal);
 	public void getAccDetails(int acc_no);

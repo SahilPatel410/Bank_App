@@ -31,15 +31,18 @@ public class Account {
 				break;
 			case "2":
 				int bal=objAcc.checkBalance();
-				System.out.println("Your Balance is Rs "+bal);
+				if(bal>0){
+					System.out.println("Your Balance is Rs "+bal);}
 				break;
 			case "3":
 				int amt=objAcc.deposite();
-				System.out.println("Total Balance is "+amt);
+				if(amt>0){
+					System.out.println("Your Balance is Rs "+amt);}
 				break;
 			case "4":
 				int amt1=objAcc.withdraw();
-				System.out.println("Total Balance is "+amt1);
+				if(amt1>0){
+					System.out.println("Your Balance is Rs "+amt1);}
 				break;
 			case "5":
 				boolean tStatus=objAcc.transfer();

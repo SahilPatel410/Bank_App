@@ -23,8 +23,7 @@ public class EmployeeProfile {
 		Double contact = sc.nextDouble();
 		id=obj.getEmployeeId(fname);
 		int ans=obj.editEmployee(fname,lname,city,age,contact,id);
-		System.out.println("Your Reacord has edited successfully!");
-
+		System.out.println("Your Record has edited successfully!");
 	}
 	public void logout(){
 		System.out.println("Logged Out..!!");

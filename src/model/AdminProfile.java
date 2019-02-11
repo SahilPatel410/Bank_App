@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class AdminProfile {
 	EmployeeDao obj = new EmployeeDao();
 	Scanner sc = new Scanner(System.in);
+	
 	public void add(){
 		System.out.println("Enter Following Detais to Add");
 		System.out.println("*****************************");
@@ -24,7 +25,7 @@ public class AdminProfile {
 		System.out.println("Role:");
 		String role = sc.nextLine();
 		obj.addEmployee(fname, lname, city, age, contact, role);
-		System.out.println("Your Reacord has addedd successfully!");
+		System.out.println("Your Record has addedd successfully!");
 	}
 	public void remove(){
 		System.out.println("Search name of Employee to be deleted");
@@ -33,8 +34,7 @@ public class AdminProfile {
 		System.out.println("Enter id of employee to delete");
 		int id = sc.nextInt();
 		int returnid=obj.removeEmployee(id);		
-		if(returnid!=0){System.out.println("Your Reacord has Removed successfully!");}
-
+		if(returnid!=0){System.out.println("Your Record has Removed successfully!");}
 	}
 	public void viewEmp(){
 		obj.viewEmployee();

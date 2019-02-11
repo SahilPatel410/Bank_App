@@ -14,20 +14,17 @@ import service.UserServices;
 public class EmployeeDao implements IEmployeeDao {
 	UserServices obj;
 	Connection con=null;
-	public void connect_db()
-	{
+	public void connect_db(){
 		try
 		{
  			 con = DriverManager.getConnection("jdbc:mysql://192.168.1.140:3306/bank_db?user=root&password=root");
 		}
 		catch(Exception e)
 		{
-			System.out.print(e);
+			System.out.println(e);
 			
 		}
-		
 	}
-	
 	public void authenticate(String Name, String Pass){
 		try{
 			connect_db();
@@ -64,27 +61,23 @@ public class EmployeeDao implements IEmployeeDao {
 	            	obj.main(null);
 	            }
 		}catch(Exception e){
-			System.out.print("Authentication Failed");
-		}
-		
+			System.out.println("Authentication Failed");
+		}	
 	}
 	public void addAdmin(String UserName,String UserPass){
 		try
 		{
 			connect_db();
 			int empId=getEmployeeId(UserName);
-			PreparedStatement ps=con.prepareStatement("insert into credentials(user_name,user_password,emp_id) values(?,?,?)");
-				
+			PreparedStatement ps=con.prepareStatement("insert into credentials(user_name,user_password,emp_id) values(?,?,?)");		
 			ps.setString(1,UserName);
 			ps.setString(2,UserPass);
 			ps.setInt(3,empId);
-			ps.executeUpdate();
-			
+			ps.executeUpdate();		
 		}
 		catch(Exception e)
 		{
-			System.out.print("Unable to add User");
-			
+			System.out.println("Unable to add User");		
 		}
 	}
 	public void addEmployee(String fname,String lname,String city,int age,double contact,String role){
@@ -98,15 +91,12 @@ public class EmployeeDao implements IEmployeeDao {
 			ps.setInt(4,age);
 			ps.setDouble(5,contact);
 			ps.setString(6,role);
-			
 			ps.executeUpdate();
-			addAdmin(fname,""+fname+"123");
-			
+			addAdmin(fname,""+fname+"123");		
 		}
 		catch(Exception e)
 		{
-			System.out.print("Unable to add Employee");
-			
+			System.out.println("Unable to add Employee");	
 		}
 	}
 	public void search(String fname){
@@ -115,7 +105,6 @@ public class EmployeeDao implements IEmployeeDao {
 			String query = "SELECT emp_id,emp_fname,emp_lname,emp_city,emp_age,emp_contact,emp_role from employee where (`emp_fname`=?)";
 			PreparedStatement ps = con.prepareStatement(query);
 			ps.setString(1, fname);
-			//ps.setString(2, lname);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				System.out.println("Employee ID:: "+rs.getInt(1));
@@ -125,14 +114,13 @@ public class EmployeeDao implements IEmployeeDao {
 				System.out.println("Employee Age:: "+rs.getInt(5));
 				System.out.println("Employee Contact:: "+rs.getDouble(6));
 				System.out.println("Employee Role:: "+rs.getString(7));
-				System.out.println("--------------------------------");
-				
+				System.out.println("--------------------------------");	
 			}
 			System.out.println();
 		}
 		catch(Exception e)
 		{
-			System.out.print("Unable to Search Employee");
+			System.out.println("Unable to Search Employee");
 		}
 	}
 	public int getEmployeeId(String fname){
@@ -144,29 +132,25 @@ public class EmployeeDao implements IEmployeeDao {
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				return rs.getInt(1);
-			}
-			
+			}			
 		}
 		catch(Exception e)
 		{
-			System.out.print("Error in loading id");
+			System.out.println("Error in loading id");
 		}
 		return 0;
 	}
 	public int editEmployee(String fname,String lname, String city,int age,double contact,int id){
 		try{
 			connect_db();
-			String sql = "UPDATE employee SET `emp_fname` = ?,`emp_lname` = ?, `emp_city` =?,`emp_age` =?,`emp_contact` =? WHERE (`emp_id` = ?)";
-			 
+			String sql = "UPDATE employee SET `emp_fname` = ?,`emp_lname` = ?, `emp_city` =?,`emp_age` =?,`emp_contact` =? WHERE (`emp_id` = ?)";			 
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, fname);
 			ps.setString(2, lname);
 			ps.setString(3, city);
 			ps.setInt(4, age);
 			ps.setDouble(5, contact);
-			ps.setInt(6, id);
-			
-			
+			ps.setInt(6, id);	
 			int rowsUpdated = ps.executeUpdate();
 			if (rowsUpdated > 0) {
 			    return rowsUpdated;
@@ -174,7 +158,7 @@ public class EmployeeDao implements IEmployeeDao {
 		}
 		catch(Exception e)
 		{
-			System.out.print("Unable to edit Employee");
+			System.out.println("Unable to edit Employee");
 		}
 		return 0;
 	}
@@ -184,26 +168,22 @@ public class EmployeeDao implements IEmployeeDao {
 			String selectSQL = "SELECT emp_fname,emp_lname, emp_age, emp_city, emp_contact,emp_role FROM employee";
 			PreparedStatement preparedStatement = con.prepareStatement(selectSQL);
 			ResultSet rs = preparedStatement.executeQuery(selectSQL );
-			while (rs.next()) {
-				System.out.println("Employee Name:: "+rs.getString(1));
-				System.out.println("Employee Name:: "+rs.getString(2));
-				System.out.println("Employee Age:: "+rs.getInt(3));
-				System.out.println("Employee City:: "+rs.getString(4));
-				System.out.println("Employee Contact:: "+rs.getDouble(5));
-				System.out.println("Employee Role:: "+rs.getString(6));
-				System.out.println("--------------------------------");
-			}
+			System.out.printf("%-10s %-10s %-5s %-12s %-12s %-10s", "First Name","Last Name",
+					"Age","city","Contact","Role");
 			System.out.println();
-			
+			while(rs.next()){
+				System.out.printf("%-10s %-10s %-5d %-12s %-12.0f %-10s",rs.getString(1),rs.getString(2),
+						rs.getInt(3),rs.getString(4),rs.getDouble(5),rs.getString(6));
+				System.out.println();
+			}
+			System.out.println();			
 		}
 		catch(Exception e)
 		{
 			System.out.println("Unable to view Employees");
 		}
 	}
-	
-	public int removeEmployee(int id){
-		
+	public int removeEmployee(int id){		
 		try
 		{
 			connect_db();
@@ -223,10 +203,8 @@ public class EmployeeDao implements IEmployeeDao {
 		{
 			System.out.println("Unable to Remove Employee");
 		}
-		return 0;
-		
+		return 0;		
 	}
-
 	public void addNewAccount(int acc_no,String acc_type,String acc_holder_name,int acc_bal){
 		try
 		{
@@ -235,20 +213,22 @@ public class EmployeeDao implements IEmployeeDao {
 			ps.setInt(1,acc_no);
 			ps.setString(2,acc_type);
 			ps.setString(3,acc_holder_name);
-			ps.setInt(4,acc_bal);
-			
+			ps.setInt(4,acc_bal);		
 			ps.executeUpdate();
 		}
 		catch(Exception e)
 		{
-			System.out.println("Unable to add Account");
-			
+			System.out.println("Unable to add Account");		
 		}
 	}
 	public int deposite(int amt, int acc_no){
 		try{
 			connect_db();
 			con.setAutoCommit(false);
+			if(!checkAccNo(acc_no))
+			   {
+			    return 0;
+			   }
 			int curr_bal=0;
 			String selectbal = "SELECT Acc_balance FROM account where Acc_no = ?";
 			PreparedStatement ps = con.prepareStatement(selectbal);
@@ -259,20 +239,15 @@ public class EmployeeDao implements IEmployeeDao {
 				curr_bal=rs.getInt(1);
 			}
 			amt=curr_bal+amt;
-			
-			String sql = "UPDATE account SET Acc_balance = ? WHERE Acc_no = ?";
-			 
+			String sql = "UPDATE account SET Acc_balance = ? WHERE Acc_no = ?";		 
 			PreparedStatement ps1 = con.prepareStatement(sql);
 			ps1.setInt(1, amt);
-			ps1.setInt(2, acc_no);
-			
-			
+			ps1.setInt(2, acc_no);		
 			int rowsUpdated = ps1.executeUpdate();
 			con.commit();
 			if (rowsUpdated > 0) {
 			    return amt;
-			}
-			
+			}		
 		}
 		catch(Exception e)
 		{
@@ -299,9 +274,12 @@ public class EmployeeDao implements IEmployeeDao {
 		try{
 			connect_db();
 			con.setAutoCommit(false);
+			if(!checkAccNo(acc_no))
+			   {
+			    return 0;
+			   }
 			int curr_bal=0;
-			String selectbal = "SELECT Acc_balance FROM account where Acc_no = ?";
-			
+			String selectbal = "SELECT Acc_balance FROM account where Acc_no = ?";			
 			PreparedStatement ps = con.prepareStatement(selectbal);
 			ps.setInt(1, acc_no);
 			ResultSet rs = ps.executeQuery();
@@ -318,15 +296,12 @@ public class EmployeeDao implements IEmployeeDao {
 			String sql = "UPDATE account SET Acc_balance = ? WHERE Acc_no = ?";
 			PreparedStatement ps1 = con.prepareStatement(sql);
 			ps1.setInt(1, amt);
-			ps1.setInt(2, acc_no);
-			
-			
+			ps1.setInt(2, acc_no);	
 			int rowsUpdated = ps1.executeUpdate();
-			con.commit();
+//			con.commit();
 			if (rowsUpdated > 0) {
 			    return amt;
-			}
-			
+			}		
 		}
 		catch(Exception e)
 		{
@@ -337,6 +312,9 @@ public class EmployeeDao implements IEmployeeDao {
 	public int checkBal(int acc_no){
 		try{
 			connect_db();
+			if(!checkAccNo(acc_no)){
+				return 0;
+			}
 			String selectbal = "SELECT Acc_balance FROM account where Acc_no = ?";
 			PreparedStatement ps = con.prepareStatement(selectbal);
 			ps.setInt(1, acc_no);
@@ -380,14 +358,13 @@ public class EmployeeDao implements IEmployeeDao {
 			String selectbal = "SELECT id,Acc_no,Acc_type,Acc_holder_name,Acc_balance FROM account";
 			PreparedStatement ps = con.prepareStatement(selectbal);
 			ResultSet rs = ps.executeQuery();
-			while(rs.next())
-			{
-				System.out.println("Account ID:: "+rs.getInt(1));
-				System.out.println("Account Number:: "+rs.getInt(2));
-				System.out.println("Account Type:: "+rs.getString(3));
-				System.out.println("Account Holder Name:: "+rs.getString(4));
-				System.out.println("Balance:: "+rs.getInt(5));
-				System.out.println("--------------------------------");
+			System.out.printf("%5s %-15s %-14s %-22s %-10s", "ID","Account Number","Account Type",
+					"Account Holder Name","Balance");
+			System.out.println();
+			while(rs.next()){
+				System.out.printf("%5d %-15d %-14s %-22s %-10d",rs.getInt(1),rs.getInt(2),rs.getString(3),
+												rs.getString(4),rs.getInt(5));
+				System.out.println();
 			}
 			System.out.println();
 		}
@@ -445,21 +422,19 @@ public class EmployeeDao implements IEmployeeDao {
 			String selectbal = "SELECT id,acc_no,loan_amt,amt_of_installment,loan_type,loan_status FROM bank_db.loan";
 			PreparedStatement ps = con.prepareStatement(selectbal);
 			ResultSet rs = ps.executeQuery();
-			while(rs.next())
-			{
-				System.out.println("Loan ID:: "+rs.getInt(1));
-				System.out.println("Account Number:: "+rs.getInt(2));
-				System.out.println("Loan Amount:: "+rs.getInt(3));
-				System.out.println("Amount of Installment:: "+rs.getInt(4));
-				System.out.println("Loan Type:: "+rs.getString(5));
-				System.out.println("Loan Status:: "+rs.getString(6));
-				System.out.println("--------------------------------");
+			System.out.printf("%7s %-15s %-13s %-22s %-10s %-15s", "Loan ID","Account Number","Loan Amount",
+					"Amount of Installment","Loan Type","Loan Status");
+			System.out.println();
+			while(rs.next()){
+				System.out.printf("%7d %-15d %-13d %-22d %-10s %-15s",rs.getInt(1),rs.getInt(2),rs.getInt(3),
+															rs.getInt(4),rs.getString(5),rs.getString(6));
+				System.out.println();
 			}
 			System.out.println();
 		}
 		catch(Exception e)
 		{
-			System.out.print("Unable to check loan status");
+			System.out.println("Unable to check loan status");
 		}
 	} 		
 	public void giveLoan(int acc_no,int loan_amt,int amt_of_installment,String loan_type,String loan_status) {
@@ -476,7 +451,7 @@ public class EmployeeDao implements IEmployeeDao {
 		} 
 		catch(Exception e)
 		{
-			System.out.print("Unable to give loan");
+			System.out.println("Unable to give loan");
 		}
 	}
 	public boolean editLoanStatus(String loanStatus,int loanId)
@@ -490,15 +465,35 @@ public class EmployeeDao implements IEmployeeDao {
 			int noRows=ps.executeUpdate();
 			if(noRows>0)
 			{
+				System.out.println("Status Edited Successfully");
 				return true;
 			}
+			System.out.println("Unable to Change the Status");
 			return false;
 		} 
 		catch(Exception e)
 		{
-			System.out.print("Unable to Change the Status");
+			System.out.println("Unable to Change the Status");
 			return false;
 		}
 	}
-
+	public boolean checkAccNo(int accNo){
+		  try{
+		   connect_db();
+		   String selectacc = "SELECT Acc_no FROM bank_db.account where Acc_no=?";
+		   PreparedStatement ps = con.prepareStatement(selectacc);
+		   ps.setInt(1,accNo);
+		   ResultSet rs = ps.executeQuery();
+		   if(rs.next())
+		   {return true;
+		   }else{
+		   System.out.println("Account Does not exist");
+		   return false;}
+		  }
+		  catch(Exception e)
+		  {
+		   System.out.println("Account Does not exist");
+		   return false;
+		  }
+		 }
 }
